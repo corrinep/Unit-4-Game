@@ -1,32 +1,80 @@
 $(document).ready(function() {
-//function that picks random number between 19 and 120 
+  console.log("Ikuze!!")
+ });
 
-var targetNumber = function(){
-  randomInt(19-120)
-  return Math.floor(math.random()*101 + 19);
-  
-}
-console.log("targetNumber");
+ //Pick random number between 19 and 120 
 
-$("#number-to-guess").text(targetNumber);
+ var random = Math.floor(Math.random() * 102 + 19);
+ $("#number-to-guess").text(random);
 
-var counter = 0;
+ console.log(random);
 
 //Giving value to crystals
-var num1 = math.floor(math.random() * 11 + 1);
-var num2 = math.floor(math.random() * 11 + 1);
-var num3 = math.floor(math.random() * 11 + 1);
-var num4 = math.floor(math.random() * 11 + 1);
+var num1 = Math.floor(Math.random() * 12 + 1);
+var num2 = Math.floor(Math.random() * 12 + 1);
+var num3 = Math.floor(Math.random() * 12 + 1);
+var num4 = Math.floor(Math.random() * 12 + 1);
   
-});
 
-var imageCrystalOne = $("<img>");
-var imageCrystalTwo = $("<img>");
-var imageCrystalThree = $("<img>");
-var imageCrystalFour = $("<img>");
+//variables for wins, losses and current total
+var wins = 0;
+var losses = 0;
+var curentTotal = 0;
 
-imageCrystalOne.addClass("crystal-image");
-imageCrystalTwo.addClass("crystal-image");
-imageCrystalThree.addClass("crystal-image");
-imageCrystalFour.addClass("crystal-image");
+$("#wins").text(wins);
+$("#losses").text(losses);
+
+//Reset function
+function reset() {
+  var random = Math.floor(Math.random() * 102 + 19);
+  $("#number-to-guess").text(random);
+  var num1 = Math.floor(Math.random() * 12 + 1);
+  var num2 = Math.floor(Math.random() * 12 + 1);
+  var num3 = Math.floor(Math.random() * 12 + 1);
+  var num4 = Math.floor(Math.random() * 12 + 1);
+  currentTotal = 0;
+  $("#score").text(currentTotal);
+}
+
+//On click events for crystals
+$(".crystal-one").on ("click", function() {
+currentTotal = currentTotal + num1;
+
+$("#score").text(currentTotal);
+})
+
+$(".crystal-two").on ("click", function() {
+  currentTotal = currentTotal + num2;
+  
+  $("#score").text(currentTotal);
+  })
+
+  $(".crystal-three").on ("click", function() {
+    currentTotal = currentTotal + num3;
+    
+    $("#score").text(currentTotal);
+    })
+
+    $(".crystal-four").on ("click", function() {
+      currentTotal = currentTotal + num4;
+      
+      $("#score").text(currentTotal);
+      })
+
+//If currentTotal is equal to random number, show win message and trigger reset
+
+if (currentTotal === random){
+  alert("You won!!!");
+  wins++;
+  $("#wins").text(wins);
+  reset();
+}
+
+//If runningTotal is greater then to random number, show win message and trigger reset
+else if (currentTotal > random){
+  alert("Oops! You lost~");
+  losses++;
+  $("#losses").text(losses);
+  reset();
+}
 
